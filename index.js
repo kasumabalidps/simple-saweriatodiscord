@@ -2,11 +2,13 @@ const { Client } = require("saweria");
 const client = new Client();
 
 const { WebhookClient } = require("discord.js");
+const dotenv = require("dotenv");
+dotenv.config();
 
 client.on("login", (user) => {
 	console.log("Logged in as: ", user.username);
 });
-client.login("putunandadps@gmail.com", "Putukasuma14").catch((error) => {
+client.login(process.env.SAWERIA_EMAIL, process.env.SAWERIA_PASSWORD).catch((error) => {
   console.error("Login failed: ", error.message || error);
 });
 
@@ -19,7 +21,7 @@ client.on("donations", (donations) => {
     console.log("Donasi Berjumlah: ", donationsArray[0].amount);
     // kirim ke discord webhook
     const webhook = new WebhookClient({
-      url: "https://discord.com/api/webhooks/1296341463743070298/xg_mo-Y2fzBZakWNBpub-BWLfDlWyjkvhCxDtolXpzevnci2v9vANS3THD-oYCFdFQ9A",
+      url: process.env.DISCORD_WEBHOOK,
     });
 
     const embed = {
