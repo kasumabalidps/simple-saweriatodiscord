@@ -32,10 +32,8 @@ client.on("donations", (donations) => {
         { name: "💰 Jumlah Donasi", value: ` \`\`\`Rp ${donationsArray[0].amount.toString()}\`\`\` `, inline: true },
         { name: "💬 Pesan dari Donator", value: ` \`\`\`${donationsArray[0].message || "Tidak ada pesan yang disertakan"}\`\`\` `, inline: false }
       ],
-      image: donationsArray[0]?.media?.src?.[0] && 
-       donationsArray[0].media.src[0].trim() !== '' &&
-       !donationsArray[0].media.src[0].endsWith('.gif')
-      ? { url: donationsArray[0].media.src[0] }
+      image: mediaSrc && mediaSrc.trim() !== ''
+      ? { url: mediaSrc.endsWith('.webp') ? mediaSrc.replace('.webp', '.gif') : mediaSrc }
       : undefined,
       footer: { text: "Setiap donasi sangat berarti bagi kami! ❤️" },
       timestamp: new Date()
